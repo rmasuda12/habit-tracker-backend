@@ -121,10 +121,26 @@ const editHabit = async(req, res) => {
     }
 }
 
+const deleteHabit = async(req, res) => {
+    const habitId = req.params.habit_id
+    try {
+        const deleted = await knex('habits')
+            .where({id: habitId})
+            .del();
+        if (deleted) {
+            res.send(`Habit with id:${habitId} has been successfully deleted`)
+        } else {
+            res.send('Habit could not be found')
+        }
+    } catch (error) {   
+        res.send(error);
+    }
+}
 
 export {
     getHabits,
     updateHabitCompletion,
     addHabit,
-    editHabit
+    editHabit,
+    deleteHabit
 }

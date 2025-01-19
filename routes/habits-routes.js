@@ -8,9 +8,11 @@ router.route('/:id')
     .get(habitsController.getHabits)
     .put(habitsController.updateHabitCompletion)
     .post(habitsController.addHabit)
+
 router.route('/:id/edit')
     .put(habitsController.editHabit)
 
-// router.route('/')
+router.route('/:id/:habit_id')
+    .delete(habitsController.deleteHabit)
 
 export default router;
