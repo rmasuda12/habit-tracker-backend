@@ -1,5 +1,6 @@
 import initKnex from "knex";
 import config from "../knexfile.js";
+
 const knex = initKnex(config);
 
 const getHabits = async(req, res) => {
@@ -15,7 +16,7 @@ const getHabits = async(req, res) => {
             )
             .groupBy('habits.id')
             .where({
-                'habits.user_id': 1
+                'habits.user_id': req.params.id
             })
         res.status(200).json(data)
     } catch (error) {
@@ -92,9 +93,38 @@ const updateHabitCompletion = async(req, res) => {
     }
 }
 
+const addHabit = async(req, res) => {
+    const newHabit = req.body;
+    try {
+        const newHabitData = {
+            habit_name: newHabit.habit_name,
+            user_id: req.params.id
+        }
+        await knex('habits')
+            .insert(newHabitData)
+
+        res.send('New habit successfully created')
+    } catch (error) {
+        res.send(error);
+    }   
+}
+
+const editHabit = async(req, res) => {
+    const newHabit = req.body
+    try {
+        const update = await knex('habits')
+            .where({id: newHabit.id})
+            .update({habit_name: newHabit.habit_name}, ['id', 'habit_name']);
+        res.send('testing');
+    } catch (error) {
+        res.send(error)
+    }
+}
 
 
 export {
     getHabits,
-    updateHabitCompletion
+    updateHabitCompletion,
+    addHabit,
+    editHabit
 }
