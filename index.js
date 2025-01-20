@@ -2,6 +2,7 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import users from "./routes/user-routes.js"
+import habits from "./routes/habits-routes.js"
 
 //tasks
 // [] incoming data validation
@@ -23,6 +24,7 @@ app.get("/", (req, res) => {
 
 // routes
 app.use("/users", users);
+app.use("/habits", habits)
 
 app.listen(PORT, () => {
   console.log(`Backend running at http://localhost:${PORT} 🚀`);
