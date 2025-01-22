@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import users from "./routes/user-routes.js"
 import habits from "./routes/habits-routes.js"
+import friends from "./routes/friend-routes.js"
 
 //tasks
 // [] incoming data validation
@@ -24,7 +25,8 @@ app.get("/", (req, res) => {
 
 // routes
 app.use("/users", users);
-app.use("/habits", habits)
+app.use("/habits", habits);
+app.use("/friends", friends);
 
 app.listen(PORT, () => {
   console.log(`Backend running at http://localhost:${PORT} 🚀`);

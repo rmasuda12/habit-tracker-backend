@@ -35,6 +35,15 @@ export async function up(knex) {
       table.integer('habit_id').unsigned().notNullable().references('habits.id').onUpdate('CASCADE').onDelete('CASCADE');
       table.date('completion_date').notNullable();
     });
+
+    await knex.schema.createTable('habitStats', (table) => {
+      table.increments('id').notNullable().primary();
+      table.date('date').notNullable(); // Primary key as the date
+      table.integer('user_id').unsigned().notNullable().references('users.id').onUpdate("CASCADE").onDelete('CASCADE');
+      table.integer('total_habits').notNullable(); // Total habits assigned
+      table.integer('completed_habits').notNullable(); // Total habits completed
+      table.float('completion_percentage').notNullable(); // Completion percentage
+    });
   };
   
 
@@ -48,4 +57,5 @@ export async function down(knex) {
     await knex.schema.dropTableIfExists('habits');
     await knex.schema.dropTableIfExists('friendship');
     await knex.schema.dropTableIfExists('users');
+    await knex.schema.dropTableIfExists('habitStats');
   };
