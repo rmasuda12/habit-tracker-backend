@@ -79,7 +79,7 @@ const updateHabitCompletion = async(req, res) => {
                   .del();
             };
         }
-        res.send("habit updater reached")
+        res.send("habit completion updated")
     } catch (error) {
         res.send(error);
     }
@@ -107,7 +107,7 @@ const editHabit = async(req, res) => {
         const update = await knex('habits')
             .where({id: newHabit.id})
             .update({habit_name: newHabit.habit_name}, ['id', 'habit_name']);
-        res.send('testing');
+        res.send('Habit successfully updated');
     } catch (error) {
         res.send(error)
     }

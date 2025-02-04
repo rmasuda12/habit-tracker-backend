@@ -1,8 +1,8 @@
 import initKnex from "knex";
 import config from "../knexfile.js";
-import friendship from "../seed-data/friendship.js";
 const knex = initKnex(config);
 
+//update this endpoint
 const getFriends = async(req, res) => {
     const date = '2025-01-22';
     try {
@@ -31,14 +31,6 @@ const getFriends = async(req, res) => {
         res.status(400).send(`Error retrieving Users: ${error}`);
     }
 };
-
-// const newUser = async(req, res) => {
-//     try {
-        
-//     } catch (error) {
-        
-//     }
-// }
 
 export {
     getFriends
