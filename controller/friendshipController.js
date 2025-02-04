@@ -1,8 +1,8 @@
 import initKnex from "knex";
 import config from "../knexfile.js";
-import friendship from "../seed-data/friendship.js";
 const knex = initKnex(config);
 
+//update this endpoint
 const getFriends = async(req, res) => {
     const date = '2025-01-22';
     try {
@@ -10,8 +10,10 @@ const getFriends = async(req, res) => {
             SELECT 
                 friendship.user_id,
                 u1.name AS user_name,
+                u1.profile_picture AS user_profile,
                 friendship.friend_id,
                 u2.name AS friend_name,
+                u2.profile_picture AS friend_profile,
                 friendship.status,
                 s1.completion_percentage AS user_completion,
                 s2.completion_percentage AS friend_completion
@@ -29,14 +31,6 @@ const getFriends = async(req, res) => {
         res.status(400).send(`Error retrieving Users: ${error}`);
     }
 };
-
-// const newUser = async(req, res) => {
-//     try {
-        
-//     } catch (error) {
-        
-//     }
-// }
 
 export {
     getFriends

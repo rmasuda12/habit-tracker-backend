@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 5050;
 //middleware
 app.use(cors());
 app.use(express.json());
-
+app.use(express.static('public'));
 
 // basic home route
 app.get("/", (req, res) => {
