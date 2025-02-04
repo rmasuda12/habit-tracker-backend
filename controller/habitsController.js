@@ -31,25 +31,19 @@ const updateHabitCompletion = async(req, res) => {
     try {
         for (const habit of updatedHabits) {
             const {id: id, completion_dates: updatedDates, user_id: userId } = habit
-            console.log('habit.completion',habit.completion_dates);
-            console.log('updatedDates', updatedDates);
 
             const existingData = await knex("habitCompletion")
                 .where({habit_id: id})
                 .pluck('completion_date');
-            console.log('this is the existing data',existingData)
-
 
             //convert existingData to string for comparison
             const existingDataStringified = existingData.map(date =>
                 new Date(date).toISOString().split('T')[0])
-            console.log(existingDataStringified);
 
             //dates to be inserted
             const dataToInsert = updatedDates.filter(
                 date => !existingDataStringified.includes(date) && date!==null
             );
-            console.log('data to insert',dataToInsert);
         
             //dates to be deleted
             const dataToDelete = existingDataStringified
@@ -60,8 +54,6 @@ const updateHabitCompletion = async(req, res) => {
                     dataNorm.toISOString()
                     return dataNorm;
                 });
-
-            console.log('data to delete',dataToDelete);
 
             //insert new data
             if (dataToInsert.length > 0) {

@@ -10,6 +10,7 @@ export async function up(knex) {
       table.string('email', 255).notNullable().unique();
       table.string('password', 255).notNullable();
       table.string('name', 255).notNullable();
+      table.string('profile_picture', 255); // New column for profile pictures
     });
   
     // Create 'friendship' table

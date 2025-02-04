@@ -10,8 +10,10 @@ const getFriends = async(req, res) => {
             SELECT 
                 friendship.user_id,
                 u1.name AS user_name,
+                u1.profile_picture AS user_profile,
                 friendship.friend_id,
                 u2.name AS friend_name,
+                u2.profile_picture AS friend_profile,
                 friendship.status,
                 s1.completion_percentage AS user_completion,
                 s2.completion_percentage AS friend_completion
